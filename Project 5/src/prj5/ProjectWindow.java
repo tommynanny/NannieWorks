@@ -38,6 +38,7 @@ public class ProjectWindow
     private ArrayList<Shape> copyshape;
     private ArrayList<Shape> stick;
     private String sortMode;
+    private String representMode;
     private Shape stick1;
     private Shape stick2;
     private Shape stick3;
@@ -47,7 +48,11 @@ public class ProjectWindow
     private Shape stick7;
     private Shape stick8;
     private Shape stick9;
-
+    private TextShape sampleText1;
+    private TextShape sampleText2;
+    private TextShape sampleText3;
+    private TextShape sampleText4;
+    
     private int w;
     private int h;
     private int w1;
@@ -69,10 +74,11 @@ public class ProjectWindow
         titlemain = new ArrayList<TextShape>();
         titlesecond = new ArrayList<TextShape>();
         sortMode = "Title";
+        representMode = "Hobby";
 
         /** title **/
         window.setTitle("prj 5 - Group 36");
-        window.setSize(1000, 800);
+        window.setSize(1100, 800);
         w = window.getWidth() / 4;
         h = (window.getHeight() - 100) / 3;
         w1 = w / 2 - 5 / 2;
@@ -112,8 +118,8 @@ public class ProjectWindow
         window.addButton(clickedRegion, WindowSide.SOUTH);
         window.addButton(clickedQuit, WindowSide.SOUTH);
 
-        Shape boxLegend = new Shape(840, 450, 140, 200, Color.BLACK);
-        Shape boxLegend2 = new Shape(841, 451, 138, 198, Color.WHITE);
+        Shape boxLegend = new Shape(840, 450, 206, 200, Color.BLACK);
+        Shape boxLegend2 = new Shape(841, 451, 204, 198, Color.WHITE);
 
         // black sticks
         stick1 = new Shape(w1, h1, 5, 40, Color.BLACK);
@@ -136,25 +142,25 @@ public class ProjectWindow
         stick.add(stick9);
 
         // legend
-        Shape sample = new Shape(908, 567, 5, 40, Color.BLACK);
+        Shape sample = new Shape(938, 567, 5, 40, Color.BLACK);
 
-        TextShape textHobby = new TextShape(862, 464, "Hobby Lengend");
-        textHobby.setBackgroundColor(Color.WHITE);
-        TextShape textRead = new TextShape(862, 480, "Read");
-        textRead.setForegroundColor(Color.PINK);
-        textRead.setBackgroundColor(Color.WHITE);
-        TextShape textArt = new TextShape(862, 496, "Art");
-        textArt.setForegroundColor(Color.BLUE);
-        textArt.setBackgroundColor(Color.WHITE);
-        TextShape textSport = new TextShape(862, 512, "Sport");
-        textSport.setForegroundColor(Color.ORANGE);
-        textSport.setBackgroundColor(Color.WHITE);
-        TextShape textMusic = new TextShape(862, 528, "Music");
-        textMusic.setForegroundColor(Color.GREEN);
-        textMusic.setBackgroundColor(Color.WHITE);
-        TextShape textHeard = new TextShape(853, 580, "Heard");
+        TextShape textLegend = new TextShape(862, 464, "Hobby Lengend");
+        textLegend.setBackgroundColor(Color.WHITE);
+         sampleText1 = new TextShape(862, 480, "Read");
+        sampleText1.setForegroundColor(Color.PINK);
+        sampleText1.setBackgroundColor(Color.WHITE);
+         sampleText2 = new TextShape(862, 496, "Art");
+        sampleText2.setForegroundColor(Color.BLUE);
+        sampleText2.setBackgroundColor(Color.WHITE);
+         sampleText3 = new TextShape(862, 512, "Sport");
+        sampleText3.setForegroundColor(Color.ORANGE);
+        sampleText3.setBackgroundColor(Color.WHITE);
+         sampleText4 = new TextShape(862, 528, "Music");
+        sampleText4.setForegroundColor(Color.GREEN);
+        sampleText4.setBackgroundColor(Color.WHITE);
+        TextShape textHeard = new TextShape(883, 580, "Heard");
         textHeard.setBackgroundColor(Color.WHITE);
-        TextShape textLiked = new TextShape(930, 580, "Liked");
+        TextShape textLiked = new TextShape(960, 580, "Liked");
         textLiked.setBackgroundColor(Color.WHITE);
 
         for (int i = 0; i < 9; i++)
@@ -230,11 +236,11 @@ public class ProjectWindow
         window.addShape(stick8);
         window.addShape(stick9);
 
-        window.addShape(textHobby);
-        window.addShape(textRead);
-        window.addShape(textSport);
-        window.addShape(textArt);
-        window.addShape(textMusic);
+        window.addShape(sampleText1);
+        window.addShape(sampleText2);
+        window.addShape(sampleText3);
+        window.addShape(sampleText4);
+        window.addShape(textLegend);
         window.addShape(textHeard);
         window.addShape(textLiked);
         window.addShape(sample);
@@ -340,8 +346,24 @@ public class ProjectWindow
             {
                 Shape current = shape.get(i);
                 window.removeShape(shape.get(i));
-                int newwidth = con.getSongList().get(num).getPHeardHobby(i % 4,
-                    0);
+
+                int newwidth = 100;
+                switch (representMode)
+                {
+                    case "Hobby":
+                        newwidth = con.getSongList().get(num).getPHeardHobby(i
+                            % 4, 0);
+                        break;
+                    case "Region":
+                        newwidth = con.getSongList().get(num).getPHeardRegion(i
+                            % 4, 0);
+                        break;
+                    case "Major":
+                        newwidth = con.getSongList().get(num).getPHeardMajor(i
+                            % 4, 0);
+                        break;
+                }
+
                 Color color = current.getBackgroundColor();
                 int newY = copyshape.get(i).getY();
                 int newx = stick.get(i / 8).getX() - newwidth;
@@ -353,8 +375,24 @@ public class ProjectWindow
             {
                 Shape current = shape.get(i);
                 window.removeShape(shape.get(i));
-                int newwidth = con.getSongList().get(num).getPLikedHobby(i % 4,
-                    0);
+
+                int newwidth = 100;
+                switch (representMode)
+                {
+                    case "Hobby":
+                        newwidth = con.getSongList().get(num).getPLikedHobby(i
+                            % 4, 0);
+                        break;
+                    case "Region":
+                        newwidth = con.getSongList().get(num).getPLikedRegion(i
+                            % 4, 0);
+                        break;
+                    case "Major":
+                        newwidth = con.getSongList().get(num).getPLikedMajor(i
+                            % 4, 0);
+                        break;
+                }
+
                 Color color = current.getBackgroundColor();
                 int newY = copyshape.get(i).getY();
                 int newX = copyshape.get(i).getX();
@@ -471,7 +509,13 @@ public class ProjectWindow
      */
     public void clickedHobby(Button button)
     {
-
+        representMode = "Hobby";
+        sampleText1 .setText("Read");
+        sampleText2 .setText("Art");
+        sampleText3 .setText("Sport");
+        sampleText4 .setText("Music");
+        
+        glyph();
     }
 
 
@@ -482,7 +526,12 @@ public class ProjectWindow
      */
     public void clickedMajor(Button button)
     {
-
+        representMode = "Major";
+        sampleText1 .setText("CS");
+        sampleText2 .setText("Math/CMDA");
+        sampleText3 .setText("Other Engineering");
+        sampleText4 .setText("Other");
+        glyph();
     }
 
 
@@ -493,7 +542,12 @@ public class ProjectWindow
      */
     public void clickedRegion(Button button)
     {
-
+        representMode = "Region";
+        sampleText1 .setText("Southeast");
+        sampleText2 .setText("Northeast");
+        sampleText3 .setText("United States");
+        sampleText4 .setText("Outside of United States");
+        glyph();
     }
 
 

@@ -133,8 +133,8 @@ public class Container
         {
             String str = scan.nextLine();
             String[] p = str.split(",", -1);
-            // int major = -1;
-            // int region = -1;
+            int major = -1;
+            int region = -1;
             int hobby = -1;
             MajorEnum a = Person.MajorEnum.NONE;
             RegionEnum b = Person.RegionEnum.NONE;
@@ -143,54 +143,54 @@ public class Container
             if (p[2].equals("Computer Science"))
             {
                 a = Person.MajorEnum.CS;
-                // major = 0;
+                major = 0;
             }
             else if (p[2].equals("Math or CMDA"))
             {
                 a = Person.MajorEnum.MC;
-                // major = 1;
+                major = 1;
             }
             else if (p[2].equals("Other Engineering"))
             {
                 a = Person.MajorEnum.OE;
-                // major = 2;
+                major = 2;
             }
             else if (p[2].equals("Other"))
             {
                 a = Person.MajorEnum.O;
-                // major = 3;
+                major = 3;
             }
             else
             {
                 a = Person.MajorEnum.NONE;
-                // major = -1;
+                major = -1;
             }
 
             if (p[3].equals("Southeast"))
             {
                 b = Person.RegionEnum.SE;
-                // region = 0;
+                region = 0;
             }
             else if (p[3].equals("Northeast"))
             {
                 b = Person.RegionEnum.NE;
-                // region = 1;
+                region = 1;
             }
             else if (p[3].equals(
                 "United States (other than Southeast or Northwest)"))
             {
                 b = Person.RegionEnum.US;
-                // region = 2;
+                region = 2;
             }
             else if (p[3].equals("Outside of United States"))
             {
                 b = Person.RegionEnum.OUS;
-                // region = 3;
+                region = 3;
             }
             else
             {
                 b = Person.RegionEnum.NONE;
-                // region = -1;
+                region = -1;
             }
 
             if (p[4].equals("reading"))
@@ -241,23 +241,31 @@ public class Container
                 if (anwser[2 * i].toLowerCase().contains("yes"))
                 {
                     currentSong.getHeardHobby(hobby, 1);
+                    currentSong.getHeardRegion(region, 1);
+                    currentSong.getHeardMajor(major, 1);
                 }
                 // deal with Liked Data
                 if (anwser[2 * i + 1].toLowerCase().contains("yes"))
                 {
                     currentSong.getLikedHobby(hobby, 1);
+                    currentSong.getLikedRegion(region, 1);
+                    currentSong.getLikedMajor(major, 1);
                 }
                 // deal with Heard Data (total)
                 if (anwser[2 * i].toLowerCase().contains("yes") || anwser[2 * i]
                     .toLowerCase().contains("no"))
                 {
                     currentSong.getTHeardHobby(hobby, 1);
+                    currentSong.getTHeardRegion(region, 1);
+                    currentSong.getTHeardMajor(major, 1);
                 }
                 // deal with Like Data (total)
                 if (anwser[2 * i + 1].toLowerCase().contains("yes") || anwser[2
                     * i + 1].toLowerCase().contains("no"))
                 {
                     currentSong.getTLikedHobby(hobby, 1);
+                    currentSong.getTLikedRegion(region, 1);
+                    currentSong.getTLikedMajor(major, 1);
                 }
             }
         }
