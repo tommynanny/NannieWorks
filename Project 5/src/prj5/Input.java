@@ -19,16 +19,16 @@ public class Input
     public static void main(String[] args)
     {
 
-        cc.scanSong(args[1]);
-        cc.scanPerson(args[0]);
+        cc.scanSong("SongListNoGenreRepeats.csv");
+        cc.scanPerson("MusicSurveyDataNoGenreRepeats.csv");
 
-        cc.sortByGenre();
+        // cc.sortByGenre();
         System.out.println(cc.getSongList().toString());
 
         // System.out.println("\n");
 
-        cc.sortByTitle();
-        System.out.println(cc.getSongList().toString());
+        // cc.sortByTitle();
+        // System.out.println(cc.getSongList().toString());
     }
 
 }

@@ -32,9 +32,12 @@ public class ProjectWindow
     private Button clickedQuit;
     private Container con;
 
-    private ArrayList<TextShape> text;
+    private ArrayList<TextShape> titlemain;
+    private ArrayList<TextShape> titlesecond;
     private ArrayList<Shape> shape;
+    private ArrayList<Shape> copyshape;
     private ArrayList<Shape> stick;
+    private String sortMode;
     private Shape stick1;
     private Shape stick2;
     private Shape stick3;
@@ -49,16 +52,24 @@ public class ProjectWindow
     private int h;
     private int w1;
     private int h1;
+    private int page;
 
 
     /**
      * @param con
      */
+    @SuppressWarnings("unchecked")
     public ProjectWindow(Container a)
     {
+        page = 0;
         con = a;
         this.window = new Window();
         stick = new ArrayList<Shape>();
+        shape = new ArrayList<Shape>();
+        titlemain = new ArrayList<TextShape>();
+        titlesecond = new ArrayList<TextShape>();
+        sortMode = "Title";
+
         /** title **/
         window.setTitle("prj 5 - Group 36");
         window.setSize(1000, 800);
@@ -146,6 +157,64 @@ public class ProjectWindow
         TextShape textLiked = new TextShape(930, 580, "Liked");
         textLiked.setBackgroundColor(Color.WHITE);
 
+        for (int i = 0; i < 9; i++)
+        {
+            int aa = i % 3;
+            int b = i / 3;
+
+            Shape l1 = new Shape(w1 + 5 + aa * w, h1 + b * h, 100, 10,
+                Color.PINK);
+            Shape l2 = new Shape(w1 + 5 + aa * w, h1 + 10 + b * h, 100, 10,
+                Color.BLUE);
+            Shape l3 = new Shape(w1 + 5 + aa * w, h1 + 20 + b * h, 100, 10,
+                Color.ORANGE);
+            Shape l4 = new Shape(w1 + 5 + aa * w, h1 + 30 + b * h, 100, 10,
+                Color.GREEN);
+
+            Shape r1 = new Shape(w1 - 100 + aa * w, h1 + b * h, 100, 10,
+                Color.PINK);
+            Shape r2 = new Shape(w1 - 100 + aa * w, h1 + 10 + b * h, 100, 10,
+                Color.BLUE);
+            Shape r3 = new Shape(w1 - 100 + aa * w, h1 + 20 + b * h, 100, 10,
+                Color.ORANGE);
+            Shape r4 = new Shape(w1 - 100 + aa * w, h1 + 30 + b * h, 100, 10,
+                Color.GREEN);
+
+            window.addShape(l1);
+            shape.add(l1);
+            window.addShape(l2);
+            shape.add(l2);
+            window.addShape(l3);
+            shape.add(l3);
+            window.addShape(l4);
+            shape.add(l4);
+            window.addShape(r1);
+            shape.add(r1);
+            window.addShape(r2);
+            shape.add(r2);
+            window.addShape(r3);
+            shape.add(r3);
+            window.addShape(r4);
+            shape.add(r4);
+            copyshape = (ArrayList<Shape>)shape.clone();
+
+            TextShape titleone = new TextShape(70 + aa * w, 31 + b * h,
+                "xxxxxxxxxxxxxx");
+
+            TextShape titletwo = new TextShape(70 + aa * w, 45 + b * h,
+                "by yyyyyyyyyy");
+
+            // title.setX(stick1.getX() - title.getWidth() / 2);
+            titleone.setBackgroundColor(Color.WHITE);
+            titletwo.setBackgroundColor(Color.WHITE);
+
+            window.addShape(titleone);
+            titlemain.add(titleone);
+
+            window.addShape(titletwo);
+            titlesecond.add(titletwo);
+        }
+
         /** glyph **/
         /** initialization **/
         glyph();
@@ -180,116 +249,162 @@ public class ProjectWindow
      */
     public void glyph()
     {
-        shape = new ArrayList<Shape>();
-        text = new ArrayList<TextShape>();
 
-        for (int i = 0; i < 9; i++)
+        if (con.getSongList().isEmpty() || con.getPersonList().isEmpty())
         {
-            int a = i % 3;
-            int b = i / 3;
-
-            Shape l1 = new Shape(w1 + 5 + a * w, h1 + b * h, 100, 10,
-                Color.PINK);
-            Shape l2 = new Shape(w1 + 5 + a * w, h1 + 10 + b * h, 100, 10,
-                Color.BLUE);
-            Shape l3 = new Shape(w1 + 5 + a * w, h1 + 20 + b * h, 100, 10,
-                Color.ORANGE);
-            Shape l4 = new Shape(w1 + 5 + a * w, h1 + 30 + b * h, 100, 10,
-                Color.GREEN);
-
-            Shape r1 = new Shape(w1 - 100 + a * w, h1 + b * h, 100, 10,
-                Color.PINK);
-            Shape r2 = new Shape(w1 - 100 + a * w, h1 + 10 + b * h, 100, 10,
-                Color.BLUE);
-            Shape r3 = new Shape(w1 - 100 + a * w, h1 + 20 + b * h, 100, 10,
-                Color.ORANGE);
-            Shape r4 = new Shape(w1 - 100 + a * w, h1 + 30 + b * h, 100, 10,
-                Color.GREEN);
-
-            window.addShape(l1);
-            shape.add(l1);
-            window.addShape(l2);
-            shape.add(l2);
-            window.addShape(l3);
-            shape.add(l3);
-            window.addShape(l4);
-            shape.add(l4);
-            window.addShape(r1);
-            shape.add(r1);
-            window.addShape(r2);
-            shape.add(r2);
-            window.addShape(r3);
-            shape.add(r3);
-            window.addShape(r4);
-            shape.add(r4);
-
-            TextShape title = new TextShape(70 + a * w, 31 + b * h,
-                "xxxxxxxxxxxxxx");
-            // title.setX(stick1.getX() - title.getWidth() / 2);
-            title.setBackgroundColor(Color.WHITE);
-
-            window.addShape(title);
-            text.add(title);
+            return;
         }
 
-        // set Song names
+        // reset stick location
+        stick1.moveTo(w1, h1);
+        stick2.moveTo(w1 + w, h1);
+        stick3.moveTo(w1 + 2 * w, h1);
+        stick4.moveTo(w1, h1 + h);
+        stick5.moveTo(w1 + w, h1 + h);
+        stick6.moveTo(w1 + 2 * w, h1 + h);
+        stick7.moveTo(w1, h1 + 2 * h);
+        stick8.moveTo(w1 + w, h1 + 2 * h);
+        stick9.moveTo(w1 + 2 * w, h1 + 2 * h);
+
+        // set Song titles
         // adjust TextShap location
-        for (int i = 0; i < 9; i++)
+        // System.out.println(con.getSongList().size());
+
+        // number of songs needed in current page
+        int need = Math.min(con.getSongList().size() - page * 9, 9);
+        for (int i = 0; i < need; i++)
         {
-            String temp = con.getSongList().get(i).getTitle();
-            text.get(i).setText(temp);
-            int newx = stick.get(i).getX() + stick.get(i).getWidth() / 2 - text
-                .get(i).getWidth() / 2;
-            text.get(i).setX(newx);
+            if (i >= need)
+            {
+                continue;
+            }
+            // change content of title main
+            String temp = con.getSongList().get(i + page * 9).getTitle();
+            titlemain.get(i).setText(temp);
+
+            // change content of title second
+            switch (sortMode)
+            {
+                case "Title":
+                    temp = con.getSongList().get(i + page * 9).getArtist();
+                    titlesecond.get(i).setText("by " + temp);
+                    break;
+                case "Artist":
+                    temp = con.getSongList().get(i + page * 9).getArtist();
+                    titlesecond.get(i).setText("by " + temp);
+                    break;
+                case "Date":
+                    temp = String.valueOf(con.getSongList().get(i + page * 9)
+                        .getDate());
+                    titlesecond.get(i).setText("Date : " + temp);
+                    break;
+                case "Genre":
+                    temp = con.getSongList().get(i + page * 9).getGenre();
+                    titlesecond.get(i).setText("Genre : " + temp);
+                    break;
+            }
+
+            // adjust titlemain X
+            int newx = stick.get(i).getX() + stick.get(i).getWidth() / 2
+                - titlemain.get(i).getWidth() / 2;
+            titlemain.get(i).setX(newx);
+
+            // adjust titlesecond X
+            newx = stick.get(i).getX() + stick.get(i).getWidth() / 2
+                - titlesecond.get(i).getWidth() / 2;
+            titlesecond.get(i).setX(newx);
+
         }
 
         // set percentage shape bars
         // adjust location
+
         for (int i = 0; i < shape.size(); i++)
         {
+            if (i >= need * 8)
+            {
+                stick.get(i / 8).move(1000, 0);
+                shape.get(i).move(1000, 0);
+                titlemain.get(i / 8).move(1000, 0);
+                titlesecond.get(i / 8).move(1000, 0);
+                continue;
+            }
             // #num element in the SongList
-            int num = i / 9;
+            int num = i / 8 + page * 9;
 
             // 0 for heard, 1 for Liked;
             // T for heard, F for Liked;
-            boolean heardMod = (i / 4) % 2 == 0;
+            boolean isHeard = (i / 4) % 2 == 1;
 
-            int temp = 0;
-            if (heardMod)
+            if (isHeard)
             {
-                temp = con.getSongList().get(num).getPHeardHobby(i % 4, 0);
-                shape.get(i)
-                int newx = stick.get(i).getX()-shape.get
+                Shape current = shape.get(i);
+                window.removeShape(shape.get(i));
+                int newwidth = con.getSongList().get(num).getPHeardHobby(i % 4,
+                    0);
+                Color color = current.getBackgroundColor();
+                int newY = copyshape.get(i).getY();
+                int newx = stick.get(i / 8).getX() - newwidth;
+                Shape newshape = new Shape(newx, newY, newwidth, 10, color);
+                shape.set(i, newshape);
+                window.addShape(shape.get(i));
             }
             else
             {
-
+                Shape current = shape.get(i);
+                window.removeShape(shape.get(i));
+                int newwidth = con.getSongList().get(num).getPLikedHobby(i % 4,
+                    0);
+                Color color = current.getBackgroundColor();
+                int newY = copyshape.get(i).getY();
+                int newX = copyshape.get(i).getX();
+                // int newx = stick.get(num).getX() - newwidth;
+                Shape newshape = new Shape(newX, newY, newwidth, 10, color);
+                shape.set(i, newshape);
+                window.addShape(shape.get(i));
             }
 
-            shape.get(i).setX(temp);
         }
+
     }
 
 
     /**
      * Previous
      * 
-     * @param button Previous
+     * @param button clickedNext
      */
-    public void clickedPrevious(Button button)
+    public void clickedNext(Button button)
     {
-
+        page++;
+        int num = con.getSongList().size();
+        if (page * 9 < num + (9 - num % 9))
+        {
+            glyph();
+        }
+        else
+        {
+            page--;
+        }
     }
 
 
     /**
      * Next
      * 
-     * @param button Next
+     * @param button clickedPrevious
      */
-    public void clickedNext(Button button)
+    public void clickedPrevious(Button button)
     {
-
+        page--;
+        if (page >= 0)
+        {
+            glyph();
+        }
+        else
+        {
+            page++;
+        }
     }
 
 
@@ -300,7 +415,10 @@ public class ProjectWindow
      */
     public void clickedArtist(Button button)
     {
-
+        con.sortByArtist();
+        page = 0;
+        sortMode = "Artist";
+        glyph();
     }
 
 
@@ -311,7 +429,10 @@ public class ProjectWindow
      */
     public void clickedTitle(Button button)
     {
-
+        con.sortByTitle();
+        page = 0;
+        sortMode = "Title";
+        glyph();
     }
 
 
@@ -322,7 +443,10 @@ public class ProjectWindow
      */
     public void clickedDate(Button button)
     {
-
+        con.sortByDate();
+        page = 0;
+        sortMode = "Date";
+        glyph();
     }
 
 
@@ -333,7 +457,10 @@ public class ProjectWindow
      */
     public void clickedGenre(Button button)
     {
-
+        con.sortByGenre();
+        page = 0;
+        sortMode = "Genre";
+        glyph();
     }
 
 

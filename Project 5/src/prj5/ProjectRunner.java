@@ -21,7 +21,9 @@ public class ProjectRunner
         Container c = new Container();
         c.scanSong("SongListNoGenreRepeats.csv");
         c.scanPerson("MusicSurveyDataNoGenreRepeats.csv");
-        
+        c.getSongList().toHobby();
+        c.getSongList().toRegion();
+        c.getSongList().toMajor();
         ProjectWindow programWindow = new ProjectWindow(c);
     }
 

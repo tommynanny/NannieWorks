@@ -69,6 +69,13 @@ public class Song
         tLikedHobby = new int[4];
         tLikedRegion = new int[4];
         tLikedMajor = new int[4];
+        
+        perHeardMajor = new int[4];
+        perLikedMajor = new int[4];
+        perHeardHobby = new int[4];
+        perLikedHobby = new int[4];
+        perHeardRegion = new int[4];
+        perLikedRegion = new int[4];
     }
 
 
