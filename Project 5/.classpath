@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/CarranoDataStructures"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/CarranoDataStructuresLib"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/CollectionDisplay"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/CS2114-Support"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/GraphWindowLib"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/WhackAShape"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
