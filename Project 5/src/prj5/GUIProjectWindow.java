@@ -17,7 +17,7 @@ import CS2114.WindowSide;
  * @author NANLIN (nannie)
  * @version 2017
  */
-public class ProjectWindow
+public class GUIProjectWindow
 {
     private Window window;
     private Button clickedPrevious;
@@ -52,7 +52,7 @@ public class ProjectWindow
     private TextShape sampleText2;
     private TextShape sampleText3;
     private TextShape sampleText4;
-    
+
     private int w;
     private int h;
     private int w1;
@@ -64,7 +64,7 @@ public class ProjectWindow
      * @param con
      */
     @SuppressWarnings("unchecked")
-    public ProjectWindow(Container a)
+    public GUIProjectWindow(Container a)
     {
         page = 0;
         con = a;
@@ -86,6 +86,7 @@ public class ProjectWindow
 
         /** shapes **/
         clickedPrevious = new Button("¡û Prev");
+        clickedPrevious.disable();
         clickedNext = new Button("¡ú Next");
         clickedArtist = new Button("Sort by Artist Name");
         clickedTitle = new Button("Sort by Song Title");
@@ -146,16 +147,16 @@ public class ProjectWindow
 
         TextShape textLegend = new TextShape(862, 464, "Hobby Lengend");
         textLegend.setBackgroundColor(Color.WHITE);
-         sampleText1 = new TextShape(862, 480, "Read");
+        sampleText1 = new TextShape(862, 480, "Read");
         sampleText1.setForegroundColor(Color.PINK);
         sampleText1.setBackgroundColor(Color.WHITE);
-         sampleText2 = new TextShape(862, 496, "Art");
+        sampleText2 = new TextShape(862, 496, "Art");
         sampleText2.setForegroundColor(Color.BLUE);
         sampleText2.setBackgroundColor(Color.WHITE);
-         sampleText3 = new TextShape(862, 512, "Sport");
+        sampleText3 = new TextShape(862, 512, "Sport");
         sampleText3.setForegroundColor(Color.ORANGE);
         sampleText3.setBackgroundColor(Color.WHITE);
-         sampleText4 = new TextShape(862, 528, "Music");
+        sampleText4 = new TextShape(862, 528, "Music");
         sampleText4.setForegroundColor(Color.GREEN);
         sampleText4.setBackgroundColor(Color.WHITE);
         TextShape textHeard = new TextShape(883, 580, "Heard");
@@ -416,13 +417,24 @@ public class ProjectWindow
     {
         page++;
         int num = con.getSongList().size();
-        if (page * 9 < num + (9 - num % 9))
+        int totalPage = (num + (9 - num % 9)) / 9;
+        if (page < totalPage)
         {
             glyph();
         }
         else
         {
             page--;
+        }
+
+        if (page == totalPage - 1)
+        {
+            clickedNext.disable();
+        }
+
+        if (page != 0)
+        {
+            clickedPrevious.enable();
         }
     }
 
@@ -435,6 +447,8 @@ public class ProjectWindow
     public void clickedPrevious(Button button)
     {
         page--;
+        int num = con.getSongList().size();
+        int totalPage = (num + (9 - num % 9)) / 9;
         if (page >= 0)
         {
             glyph();
@@ -442,6 +456,16 @@ public class ProjectWindow
         else
         {
             page++;
+        }
+
+        if (page == 0)
+        {
+            clickedPrevious.disable();
+        }
+
+        if (page < totalPage - 1)
+        {
+            clickedNext.enable();
         }
     }
 
@@ -454,7 +478,7 @@ public class ProjectWindow
     public void clickedArtist(Button button)
     {
         con.sortByArtist();
-        page = 0;
+        // page = 0;
         sortMode = "Artist";
         glyph();
     }
@@ -468,7 +492,7 @@ public class ProjectWindow
     public void clickedTitle(Button button)
     {
         con.sortByTitle();
-        page = 0;
+        // page = 0;
         sortMode = "Title";
         glyph();
     }
@@ -482,7 +506,7 @@ public class ProjectWindow
     public void clickedDate(Button button)
     {
         con.sortByDate();
-        page = 0;
+        // page = 0;
         sortMode = "Date";
         glyph();
     }
@@ -496,7 +520,7 @@ public class ProjectWindow
     public void clickedGenre(Button button)
     {
         con.sortByGenre();
-        page = 0;
+        // page = 0;
         sortMode = "Genre";
         glyph();
     }
@@ -510,11 +534,11 @@ public class ProjectWindow
     public void clickedHobby(Button button)
     {
         representMode = "Hobby";
-        sampleText1 .setText("Read");
-        sampleText2 .setText("Art");
-        sampleText3 .setText("Sport");
-        sampleText4 .setText("Music");
-        
+        sampleText1.setText("Read");
+        sampleText2.setText("Art");
+        sampleText3.setText("Sport");
+        sampleText4.setText("Music");
+
         glyph();
     }
 
@@ -527,10 +551,10 @@ public class ProjectWindow
     public void clickedMajor(Button button)
     {
         representMode = "Major";
-        sampleText1 .setText("CS");
-        sampleText2 .setText("Math/CMDA");
-        sampleText3 .setText("Other Engineering");
-        sampleText4 .setText("Other");
+        sampleText1.setText("CS");
+        sampleText2.setText("Math/CMDA");
+        sampleText3.setText("Other Engineering");
+        sampleText4.setText("Other");
         glyph();
     }
 
@@ -543,10 +567,10 @@ public class ProjectWindow
     public void clickedRegion(Button button)
     {
         representMode = "Region";
-        sampleText1 .setText("Southeast");
-        sampleText2 .setText("Northeast");
-        sampleText3 .setText("United States");
-        sampleText4 .setText("Outside of United States");
+        sampleText1.setText("Southeast");
+        sampleText2.setText("Northeast");
+        sampleText3.setText("United States");
+        sampleText4.setText("Outside of United States");
         glyph();
     }
 

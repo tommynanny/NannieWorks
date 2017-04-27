@@ -110,4 +110,43 @@ public class SongTest extends TestCase
         }
 
     }
+
+
+    /**
+     * 
+     */
+    public void testGetMethod3()
+    {
+        assertEquals(0, song.getPHeardHobby(0, 0));
+        assertEquals(0, song.getPHeardHobby(1, 0));
+        assertEquals(0, song.getPHeardHobby(2, 0));
+        assertEquals(0, song.getPHeardHobby(3, 0));
+
+        assertEquals(1, song.getPHeardHobby(0, 1));
+        assertEquals(2, song.getPHeardHobby(1, 2));
+        assertEquals(3, song.getPHeardHobby(2, 3));
+        assertEquals(4, song.getPHeardHobby(3, 4));
+
+        assertEquals(1, song.getPHeardHobby(0, 0));
+        assertEquals(2, song.getPHeardHobby(1, 0));
+        assertEquals(3, song.getPHeardHobby(2, 0));
+        assertEquals(4, song.getPHeardHobby(3, 0));
+
+        assertEquals(0, song.getPHeardHobby(0, -1));
+        assertEquals(0, song.getPHeardHobby(1, -2));
+        assertEquals(0, song.getPHeardHobby(2, -3));
+        assertEquals(0, song.getPHeardHobby(3, -4));
+
+        for (int i = 1; i <= 120; i++)
+        {
+            assertEquals((1 + i) * i / 2, song.getPHeardHobby(0, i));
+            assertEquals((1 + i) * i / 2, song.getPHeardMajor(0, i));
+            assertEquals((1 + i) * i / 2, song.getPHeardRegion(0, i));
+
+            assertEquals((1 + i) * i / 2, song.getPLikedHobby(0, i));
+            assertEquals((1 + i) * i / 2, song.getPLikedMajor(0, i));
+            assertEquals((1 + i) * i / 2, song.getPLikedRegion(0, i));
+        }
+
+    }
 }

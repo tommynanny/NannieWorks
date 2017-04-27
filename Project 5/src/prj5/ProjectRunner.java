@@ -19,12 +19,12 @@ public class ProjectRunner
     public static void main(String[] args)
     {
         Container c = new Container();
-        c.scanSong("SongListNoGenreRepeats.csv");
-        c.scanPerson("MusicSurveyDataNoGenreRepeats.csv");
+        c.scanSong("SongList2017S.csv");
+        c.scanPerson("MusicSurveyData2017S.csv");
         c.getSongList().toHobby();
         c.getSongList().toRegion();
         c.getSongList().toMajor();
-        ProjectWindow programWindow = new ProjectWindow(c);
+        GUIProjectWindow programWindow = new GUIProjectWindow(c);
     }
 
 }

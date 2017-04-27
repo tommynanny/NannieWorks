@@ -26,7 +26,7 @@ public class Song
     private int[] tLikedHobby;
     private int[] tLikedRegion;
     private int[] tLikedMajor;
-    
+
     private int[] perHeardMajor;
     private int[] perLikedMajor;
     private int[] perHeardHobby;
@@ -69,7 +69,7 @@ public class Song
         tLikedHobby = new int[4];
         tLikedRegion = new int[4];
         tLikedMajor = new int[4];
-        
+
         perHeardMajor = new int[4];
         perLikedMajor = new int[4];
         perHeardHobby = new int[4];
@@ -392,5 +392,4 @@ public class Song
         return perLikedRegion[a];
     }
 
-    
 }

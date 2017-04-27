@@ -87,12 +87,18 @@ public class ContainerTest extends TestCase
      */
     public void testSortByTitle()
     {
-        //c.scanSong("SongListNoGenreRepeats.csv");
-        //c.scanPerson("MusicSurveyDataNoGenreRepeats.csv");
-        c.getSongList().add(new Song("zzz","nanlin",1996,"none"));
-        c.getSongList().add(new Song("yyz","nanlin",1996,"none"));
-        c.getSongList().add(new Song("yya","nanlin",1996,"none"));
-        c.getSongList().add(new Song("aaa","nanlin",1996,"none"));
+        // c.scanSong("SongListNoGenreRepeats.csv");
+        // c.scanPerson("MusicSurveyDataNoGenreRepeats.csv");
+        c.getSongList().add(new Song("bb121", "nanlin", 1996, "none"));
+        c.getSongList().add(new Song("bb121", "nanlin", 1996, "none"));
+        c.getSongList().add(new Song("a121", "nanlin", 1996, "none"));
+        c.getSongList().add(new Song("a121", "nanlin", 1996, "none"));
+        c.getSongList().add(new Song("zzz", "nanlin", 1996, "none"));
+        c.getSongList().add(new Song("ccc", "nanlin", 1996, "none"));
+        c.getSongList().add(new Song("yyz", "nanlin", 1996, "none"));
+        c.getSongList().add(new Song("zzz", "nanlin", 1996, "none"));
+        c.getSongList().add(new Song("yya", "nanlin", 1996, "none"));
+        c.getSongList().add(new Song("aaa", "nanlin", 1996, "none"));
         c.sortByTitle();
         for (int i = 0; i < c.getSongList().size() - 1; i++)
         {
@@ -227,9 +233,9 @@ public class ContainerTest extends TestCase
          * overall information
          */
         // 4 people love sports who have heard the first music
-        assertEquals(4, c.getSongList().get(1).getTHeardHobby(1, 0));
+        assertEquals(0, c.getSongList().get(1).getTHeardHobby(1, 0));
         // 2 people love sports who like the first music
-        assertEquals(2, c.getSongList().get(1).getTLikedHobby(1, 0));
+        assertEquals(0, c.getSongList().get(1).getTLikedHobby(1, 0));
 
         /*
          * first song
@@ -241,22 +247,22 @@ public class ContainerTest extends TestCase
         assertEquals(0, c.getSongList().get(0).getLikedHobby(0, 0));
 
         // 2 people have heard first song also love sport
-        assertEquals(2, c.getSongList().get(0).getHeardHobby(1, 0));
+        assertEquals(0, c.getSongList().get(0).getHeardHobby(1, 0));
 
         // 2 people love first song also love sport
-        assertEquals(2, c.getSongList().get(0).getLikedHobby(1, 0));
+        assertEquals(0, c.getSongList().get(0).getLikedHobby(1, 0));
 
         // 0 people have heard first song also love music
-        assertEquals(0, c.getSongList().get(0).getHeardHobby(2, 0));
+        assertEquals(2, c.getSongList().get(0).getHeardHobby(2, 0));
 
         // 0 people love first song also love music
-        assertEquals(1, c.getSongList().get(0).getLikedHobby(2, 0));
+        assertEquals(2, c.getSongList().get(0).getLikedHobby(2, 0));
 
         // 0 people have heard first song also love art
         assertEquals(0, c.getSongList().get(0).getHeardHobby(3, 0));
 
         // 0 people love first song also love art
-        assertEquals(0, c.getSongList().get(0).getLikedHobby(3, 0));
+        assertEquals(1, c.getSongList().get(0).getLikedHobby(3, 0));
 
         /**
          * second song
@@ -268,13 +274,13 @@ public class ContainerTest extends TestCase
         assertEquals(1, c.getSongList().get(1).getLikedHobby(0, 0));
 
         // 2 people have heard second song also love sport
-        assertEquals(4, c.getSongList().get(1).getHeardHobby(1, 0));
+        assertEquals(0, c.getSongList().get(1).getHeardHobby(1, 0));
 
         // 2 people love second song also love sport
-        assertEquals(1, c.getSongList().get(1).getLikedHobby(1, 0));
+        assertEquals(0, c.getSongList().get(1).getLikedHobby(1, 0));
 
         // 0 people have heard second song also love music
-        assertEquals(0, c.getSongList().get(1).getHeardHobby(2, 0));
+        assertEquals(4, c.getSongList().get(1).getHeardHobby(2, 0));
 
         // 0 people love second song also love music
         assertEquals(1, c.getSongList().get(1).getLikedHobby(0, 0));
@@ -283,7 +289,7 @@ public class ContainerTest extends TestCase
         assertEquals(0, c.getSongList().get(1).getHeardHobby(3, 0));
 
         // 0 people love second song also love art
-        assertEquals(0, c.getSongList().get(1).getLikedHobby(3, 0));
+        assertEquals(1, c.getSongList().get(1).getLikedHobby(3, 0));
     }
 
 

@@ -128,7 +128,7 @@ public class Container
         listOfPeople.clear();
         // start from the second line to read data
         scan.nextLine();
-
+        scan.nextLine();
         while (scan.hasNext())
         {
             String str = scan.nextLine();

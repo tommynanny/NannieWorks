@@ -3,6 +3,7 @@
  */
 package prj5;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import student.TestCase;
@@ -253,6 +254,7 @@ public class LinkedListTest extends TestCase
             exception instanceof IndexOutOfBoundsException);
 
         list.clear();
+
         exception = null;
         try
         {
@@ -266,6 +268,75 @@ public class LinkedListTest extends TestCase
         assertTrue("remove() is throwing the wrong type of exceptions",
             exception instanceof IndexOutOfBoundsException);
 
+        list.clear();
+        list.add("1");
+        assertTrue(list.remove(0));
+
+        list.clear();
+        list.add("1");
+        list.add("2");
+        list.add("3");
+        list.add("4");
+        assertTrue(list.remove(0));
+        assertTrue(list.remove(0));
+        assertTrue(list.remove(0));
+        assertTrue(list.remove(0));
+
+        list.clear();
+        exception = null;
+        try
+        {
+            list.remove(0);
+            fail("remove() is not throwing an exception when it should");
+        }
+        catch (Exception e)
+        {
+            exception = e;
+        }
+        assertTrue("remove() is throwing the wrong type of exceptions",
+            exception instanceof IndexOutOfBoundsException);
+
+        list.clear();
+        list.add("1");
+        list.add("2");
+        list.add("3");
+        list.add("4");
+        exception = null;
+        try
+        {
+            list.remove(99);
+            fail("remove() is not throwing an exception when it should");
+        }
+        catch (Exception e)
+        {
+            exception = e;
+        }
+        assertTrue("remove() is throwing the wrong type of exceptions",
+            exception instanceof IndexOutOfBoundsException);
+
+    }
+
+
+    /**
+     * 
+     */
+    public void testToArray()
+    {
+        list.clear();
+        assertTrue(Arrays.equals(new String[0], list.toArray()));
+
+        list.clear();
+        list.add("1");
+        assertTrue(Arrays.equals(new String[]
+        { "1" }, list.toArray()));
+
+        list.clear();
+        list.add("1");
+        list.add("3");
+        list.add("5");
+
+        assertTrue(Arrays.equals(new String[]
+        { "1", "3", "5" }, list.toArray()));
     }
 
 

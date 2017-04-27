@@ -207,7 +207,7 @@ public class LinkedList<T>
     public boolean remove(int index)
     {
         // // if the index is invalid
-        if (index < 0 && index > size() || head == null)
+        if (index < 0 || head == null)
         {
             throw new IndexOutOfBoundsException("Index is out of bounds");
         }
@@ -238,6 +238,7 @@ public class LinkedList<T>
                 currentIndex++; // fixed
             }
 
+            // return result;
             // if the element was never found, this also handles empty case
             throw new IndexOutOfBoundsException("Index is out of bounds");
         }
